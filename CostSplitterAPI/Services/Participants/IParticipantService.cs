@@ -1,6 +1,10 @@
-﻿namespace CostSplitterAPI.Services.Participants
+﻿using CostSplitterAPI.Models;
+using System.Threading.Tasks;
+
+namespace CostSplitterAPI.Services.Participants
 {
     public interface IParticipantService
     {
+        Task<IResult> AddParticipant(Participant participant);
     }
 }
