@@ -1,5 +1,6 @@
 ﻿using CostSplitterAPI.Data;
 using CostSplitterAPI.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace CostSplitterAPI.Services.SingleCosts
 {
@@ -18,6 +19,11 @@ namespace CostSplitterAPI.Services.SingleCosts
             _context.SingleCosts.Add(singleCost);
             await _context.SaveChangesAsync();
             return Results.Created($"/singleCost/{singleCost.SingleCostId}", singleCost);
+        }
+
+        public async Task<IResult> GetSingleCostsByBillId(Guid billId)
+        {
+            return Results.Ok(await _context.SingleCosts.Where(s => s.BillId == billId).ToListAsync());
         }
     }
 }
