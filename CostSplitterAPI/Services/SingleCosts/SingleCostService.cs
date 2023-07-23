@@ -21,6 +21,15 @@ namespace CostSplitterAPI.Services.SingleCosts
             return Results.Created($"/singleCost/{singleCost.SingleCostId}", singleCost);
         }
 
+        public async Task<IResult> DeleteSingleCost(Guid singleCostId)
+        {
+            SingleCost singleCostToDelete = _context.SingleCosts.Where(s => s.BillId == singleCostId).FirstOrDefault();
+            _context.SingleCosts.Remove(singleCostToDelete);
+            _context.SaveChanges();
+            return Results.Ok();
+        }
+    
+
         public async Task<IResult> GetSingleCostsByBillId(Guid billId)
         {
             return Results.Ok(await _context.SingleCosts.Where(s => s.BillId == billId).ToListAsync());

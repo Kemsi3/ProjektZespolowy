@@ -42,7 +42,7 @@ namespace CostSplitterAPI.Migrations
                 {
                     SingleCostId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     BillId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ParticipantId = table.Column<int>(type: "int", nullable: false),
+                    ParticipantId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Cost = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
                 },

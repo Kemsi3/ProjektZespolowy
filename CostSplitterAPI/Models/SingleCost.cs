@@ -6,7 +6,7 @@
 
         public Guid BillId { get; set; }
 
-        public int ParticipantId { get; set; }
+        public Guid ParticipantId { get; set; }
 
         public string Description { get; set; }    
 

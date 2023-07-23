@@ -1,4 +1,5 @@
 ﻿using CostSplitterAPI.Models;
+using System.Runtime.CompilerServices;
 
 namespace CostSplitterAPI.Services.Transactions
 {
@@ -7,5 +8,7 @@ namespace CostSplitterAPI.Services.Transactions
         Task<IResult> AddTransaction(Transaction transaction);
 
         Task<IResult> GetTransactionsByBillId(Guid billId);
+
+        Task<IResult> DeleteTransaction(Guid transactionId);
     }
 }

@@ -1,4 +1,5 @@
 ﻿using CostSplitterAPI.Models;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 
 namespace CostSplitterAPI.Services.Participants
@@ -7,6 +8,8 @@ namespace CostSplitterAPI.Services.Participants
     {
         Task<IResult> AddParticipant(Participant participant);
 
-        Task<IResult> GetParticipantsByBillId(Guid BillId);
+        Task<IResult> GetParticipantsByBillId(Guid billId);
+
+        Task<IResult> DeleteParticipant(Guid participantId);
     }
 }

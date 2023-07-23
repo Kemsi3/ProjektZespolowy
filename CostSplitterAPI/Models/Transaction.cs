@@ -6,9 +6,9 @@
 
         public Guid BillId { get; set; }
 
-        public int SenderId { get; set; }  
+        public Guid SenderId { get; set; }  
 
-        public int ReceiverId { get; set; }
+        public Guid ReceiverId { get; set; }
 
         public decimal Value { get; set; }
     }

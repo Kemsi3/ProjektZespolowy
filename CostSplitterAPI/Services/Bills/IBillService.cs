@@ -7,5 +7,9 @@ namespace CostSplitterAPI.Services.Bills
         Task<IResult> AddBill(Bill bill);
 
         Task<IResult> GetBillsByUserId(Guid userId);
+
+        Task<IResult> SplitBill (Guid billId);
+
+        Task<IResult> DeleteBill (Guid billId);
     }
 }
