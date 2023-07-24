@@ -1,0 +1,69 @@
+﻿
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+}
+
+/* Styl nagłówka h1 */
+.heading {
+    text-align: center;
+    margin: 20px 0;
+    color: #333;
+}
+
+/* Styl formularza */
+.form-container {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.cost-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-label {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.form-input {
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+.submit-button {
+    padding: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+/* Styl wyników */
+.result-heading {
+    text-align: center;
+    margin: 20px 0;
+    color: #333;
+}
+
+.cost-list {
+    list-style: none;
+    padding: 0;
+}
+
+    .cost-list li {
+        margin-bottom: 5px;
+    }

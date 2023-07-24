@@ -1,0 +1,69 @@
+﻿@{
+    ViewData["Title"] = "Rozbijacz kosztów";
+}
+@{
+    Layout = "_Layout";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalkulator Podziału Kosztów</title>
+</head>
+<body>
+    <h1 class="heading">Kalkulator Podziału Kosztów</h1>
+
+    <!-- Formularz do wprowadzania kosztów -->
+    <div class="form-container">
+        <h2>Wprowadź koszty wycieczki:</h2>
+        <form id="costForm" class="cost-form">
+            <label for="totalCost" class="form-label">Całkowity koszt wycieczki:</label>
+            <input type="number" id="totalCost" name="totalCost" step="0.01" required class="form-input">
+
+            <label for="numberOfParticipants" class="form-label">Liczba uczestników:</label>
+            <input type="number" id="numberOfParticipants" name="numberOfParticipants" min="1" required class="form-input">
+
+            <button type="submit" class="submit-button">Oblicz podział</button>
+        </form>
+    </div>
+
+    <!-- Wynik podziału kosztów -->
+    <div id="result" style="display: none;">
+        <h2 class="result-heading">Wynik podziału kosztów:</h2>
+        <ul id="costBreakdown" class="cost-list"></ul>
+    </div>
+
+    <!-- Skrypt JavaScript do obsługi kalkulatora -->
+    <script>
+        document.getElementById("costForm").addEventListener("submit", function (event) {
+            event.preventDefault();
+            const totalCost = parseFloat(document.getElementById("totalCost").value);
+            const numberOfParticipants = parseInt(document.getElementById("numberOfParticipants").value);
+
+            if (!isNaN(totalCost) && !isNaN(numberOfParticipants) && numberOfParticipants > 0) {
+                const costPerPerson = totalCost / numberOfParticipants;
+                const costBreakdownElement = document.getElementById("costBreakdown");
+
+                // Usunięcie poprzednich wyników (jeśli istnieją)
+                while (costBreakdownElement.firstChild) {
+                    costBreakdownElement.removeChild(costBreakdownElement.firstChild);
+                }
+
+                // Wyświetlenie wyników
+                for (let i = 1; i <= numberOfParticipants; i++) {
+                    const listItem = document.createElement("li");
+                    listItem.textContent = `Osoba ${i}: ${costPerPerson.toFixed(2)} zł`;
+                    costBreakdownElement.appendChild(listItem);
+                }
+
+                // Pokazanie wyników
+                document.getElementById("result").style.display = "block";
+            } else {
+                alert("Wprowadź poprawną liczbę uczestników oraz całkowity koszt wycieczki.");
+            }
+        });
+    </script>
+</body>
+</html>

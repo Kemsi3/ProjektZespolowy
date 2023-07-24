@@ -1,0 +1,85 @@
+﻿@{
+    ViewData["Title"] = "Dodawanie rachunku";
+}
+
+@{
+    Layout = "_Layout";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formularz Nowego Rachunku</title>
+</head>
+<body>
+    <h1>Nowy Rachunek</h1>
+
+    <form id="billForm">
+        <label for="totalCost">Całkowity koszt:</label>
+        <input type="number" id="totalCost" name="totalCost" step="0.01" required>
+
+        <label>Uczestnicy:</label>
+        <div id="participantsContainer">
+            <!-- Checkboxy będą dynamicznie generowane na podstawie listy użytkowników pobranej z endpointu /user/ -->
+        </div>
+
+        <button type="submit">Dodaj Rachunek</button>
+    </form>
+
+    <script>
+        // Pobranie listy użytkowników z endpointu /user/ i wygenerowanie checkboxów
+        async function loadUsers() {
+            const usersResponse = await fetch('/user/');
+            if (usersResponse.ok) {
+                const usersData = await usersResponse.json();
+                const participantsContainer = document.getElementById("participantsContainer");
+
+                // Generowanie checkboxów dla każdego użytkownika
+                usersData.forEach(user => {
+                    const checkboxLabel = document.createElement("label");
+                    checkboxLabel.textContent = user.email;
+
+                    const checkbox = document.createElement("input");
+                    checkbox.type = "checkbox";
+                    checkbox.name = "participants";
+                    checkbox.value = user.userId;
+
+                    checkboxLabel.appendChild(checkbox);
+                    participantsContainer.appendChild(checkboxLabel);
+                });
+            }
+        }
+
+        // Wywołanie funkcji loadUsers do załadowania listy użytkowników na starcie strony
+        loadUsers();
+
+        document.getElementById("billForm").addEventListener("submit", async function (event) {
+            event.preventDefault();
+
+            const formData = {
+                totalCost: parseFloat(document.getElementById("totalCost").value),
+                participants: Array.from(document.querySelectorAll('input[name="participants"]:checked')).map(checkbox => checkbox.value)
+            };
+
+            // Wysyłanie danych rachunku do endpointu /bill/
+            const billResponse = await fetch('/bill/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            });
+
+            if (billResponse.ok) {
+                // Dodanie rachunku powiodło się, wykonaj odpowiednie akcje
+                console.log('Nowy rachunek został dodany!');
+            } else {
+                // Nie udało się dodać rachunku, obsłuż błąd
+                console.error('Błąd podczas dodawania rachunku.');
+            }
+        });
+    </script>
+</body>
+</html>
