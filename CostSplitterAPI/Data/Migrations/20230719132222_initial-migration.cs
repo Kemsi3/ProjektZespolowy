@@ -14,6 +14,7 @@ namespace CostSplitterAPI.Migrations
                 columns: table => new
                 {
                     BillId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    BillName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     TotalCost = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
                 },

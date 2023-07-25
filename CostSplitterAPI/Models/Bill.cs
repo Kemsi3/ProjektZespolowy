@@ -4,7 +4,9 @@
     {
         public Guid BillId { get; set; }
 
-        public Guid UserId { get; set; }    
+        public Guid UserId { get; set; } 
+        
+        public string BillName { get; set; }
 
         //public List<Participant> Participants { get; set; }
 
